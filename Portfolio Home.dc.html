@@ -257,11 +257,33 @@ class Component extends DCLogic {
       openMenu: () => this.setState({ menuOpen: true }),
       closeMenu: () => this.setState({ menuOpen: false }),
       toggleTheme: () => this.setState(s => ({ light: !s.light })),
-      sendMail: () => {
-        const v = id => (document.getElementById(id) || {}).value || '';
-        const body = encodeURIComponent(v('cf-msg') + '\n\n— ' + v('cf-name') + ' (' + v('cf-email') + ')');
-        const subj = encodeURIComponent('Portfolio contact — ' + v('cf-name'));
-        window.location.href = 'mailto:akhiljithashok@gmail.com?subject=' + subj + '&body=' + body;
+      sendMail: async () => {
+        const ENDPOINT = 'https://formspree.io/f/xzdnznbr';
+        const v = id => (document.getElementById(id) || {}).value.trim();
+        const btn = document.querySelector('#contact button.btn.solid');
+        const name = v('cf-name'), email = v('cf-email'), message = v('cf-msg');
+        if (!name || !email || !message) { alert('Please fill in your name, email and message.'); return; }
+        const orig = btn ? btn.textContent : '';
+        if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+        try {
+          const res = await fetch(ENDPOINT, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, message, _subject: 'Portfolio contact — ' + name })
+          });
+          if (res.ok) {
+            ['cf-name','cf-email','cf-msg'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+            if (btn) { btn.textContent = 'Message sent ✓'; setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 4000); }
+          } else {
+            const data = await res.json().catch(() => ({}));
+            const err = (data && data.errors) ? data.errors.map(e => e.message).join(', ') : 'Something went wrong.';
+            if (btn) { btn.textContent = orig; btn.disabled = false; }
+            alert('Could not send: ' + err);
+          }
+        } catch (e) {
+          if (btn) { btn.textContent = orig; btn.disabled = false; }
+          alert('Network error — please email me directly at akhiljithashok@gmail.com');
+        }
       }
     };
   }
