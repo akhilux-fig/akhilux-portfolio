@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Archivo:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+:root{--acc:#C9F24E;--bg:#0F0E0C;--sur:#171512;--line:#2A2723;--ink:#ECE8E0;--mut:#8F8A80}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Archivo',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--ink);text-decoration:none}a:hover{color:var(--acc)}
+.disp{font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:.01em;line-height:.92;margin:0}
+.mono{font-family:'JetBrains Mono',monospace}
+.mut{color:var(--mut)}
+.acc{color:var(--acc)}
+.sec{padding:110px 64px;border-top:1px solid var(--line)}
+.wrap{max-width:1280px;margin:0 auto}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+.h2{font-size:clamp(48px,7vw,96px)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border:1px solid var(--ink);border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;background:none;color:var(--ink);transition:all .2s}
+.btn:hover{background:var(--acc);border-color:var(--acc);color:#0F0E0C}
+.btn.solid{background:var(--acc);border-color:var(--acc);color:#0F0E0C}
+.btn.solid:hover{background:var(--ink);border-color:var(--ink)}
+.card{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--sur);display:block;transition:border-color .2s}
+.card:hover{border-color:var(--acc);color:var(--ink)}
+.thumb{height:340px;position:relative;background:var(--thumb)}
+:root{--thumb:#1B1916}
+html.light{--thumb:#E4E1D9}
+.cmeta{padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:6px 12px;white-space:nowrap}
+.tag.hl{color:#0F0E0C;background:var(--acc);border-color:var(--acc)}
+.xrow{display:grid;grid-template-columns:90px 1fr 1.4fr;gap:32px;padding:36px 0;border-top:1px solid var(--line);align-items:baseline}
+.xrow:last-child{border-bottom:1px solid var(--line)}
+.erow{display:grid;grid-template-columns:1.3fr 1fr .6fr;gap:32px;padding:36px 0;border-top:1px solid var(--line)}
+.erow:last-child{border-bottom:1px solid var(--line)}
+.marq{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;white-space:nowrap;transform:rotate(-1deg);width:100vw;margin:90px 0 40px calc(50% - 50vw);background:var(--bg)}
+.mtrack{display:inline-flex;gap:48px;animation:scroll 60s linear infinite}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mitem{font-family:'Anton',sans-serif;font-size:28px;text-transform:uppercase;color:var(--mut);display:inline-flex;align-items:center;gap:48px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--acc);display:inline-block}
+.field{display:flex;flex-direction:column;gap:8px}
+.inp{background:var(--sur);border:1px solid var(--line);border-radius:12px;padding:16px;color:var(--ink);font-family:'Archivo',sans-serif;font-size:15px;outline:none}
+.inp:focus{border-color:var(--acc)}
+.lbl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.navlink{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.navlink:hover{color:var(--acc)}
+.slink{border:1px solid var(--line);border-radius:999px;padding:12px 22px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.slink:hover{border-color:var(--acc)}
+.big{font-size:clamp(72px,12.5vw,220px)}
+.lead{font-size:clamp(20px,2.2vw,30px);line-height:1.45;font-weight:500}
+.stat{border-top:1px solid var(--line);padding:24px 0;display:flex;align-items:baseline;justify-content:space-between}
+.statnum{font-family:'Anton',sans-serif;font-size:44px}
+.rv{display:block;overflow:hidden}
+.rvi{display:inline-block;transform:translateY(115%);transition:transform .9s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
+.rv.in .rvi{transform:translateY(0)}
+.fadeup{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .8s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
+.fadeup.in{opacity:1;transform:translateY(0)}
+html.light{--bg:#EFEDE9;--sur:#FFFFFF;--line:#D8D4CB;--ink:#131210;--mut:#7A756B}
+html.light .logoimg{filter:invert(1)}
+@media (pointer:fine){html,body,a,button,input,textarea,label,.btn,.card,.dotsbtn,.xbtn,.mlink,.inp,.navlink,.slink{cursor:none !important}}
+.navbar{background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px)}
+.dotsbtn{width:46px;height:46px;border-radius:50%;border:none;background:transparent;display:grid;place-items:center;transition:background .25s}
+.dotsbtn:hover{background:var(--sur)}
+.dgrid{display:grid;grid-template-columns:3px 3px;gap:9px;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.dotsbtn:hover .dgrid{transform:rotate(45deg)}
+.d{width:3px;height:3px;border-radius:50%;background:var(--ink)}
+.menu{position:fixed;inset:0;background:var(--bg);z-index:50;display:flex;flex-direction:column;justify-content:space-between;padding:24px 64px;box-sizing:border-box;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s}
+.menu.open{opacity:1;visibility:visible}
+.mline{overflow:hidden;text-align:center;padding:0 30px}
+.mlink{display:inline-block;font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(56px,8.5vw,110px);line-height:1.02;color:var(--ink);transform:translateY(110%);transition:transform .25s ease,color .2s;position:relative}
+.roll{display:block;position:relative;transition:transform .55s cubic-bezier(.22,1,.36,1)}
+.rt2{position:absolute;top:100%;left:0;width:100%}
+.mlink:hover .roll{transform:translateY(-100%)}
+.msup{font-family:'JetBrains Mono',monospace;font-size:14px;position:absolute;top:10px;left:-26px;color:var(--ink);opacity:0;transition:opacity .25s}
+.mlink:hover .msup{opacity:1}
+.menu.open .mline:nth-child(1) .mlink{transition-delay:.2s}
+.menu.open .mline:nth-child(2) .mlink{transition-delay:.28s}
+.menu.open .mline:nth-child(3) .mlink{transition-delay:.36s}
+.menu.open .mlink{transform:translateY(0);transition:transform .7s cubic-bezier(.16,1,.3,1),color .2s}
+.xbtn{width:46px;height:46px;border-radius:50%;border:none;background:var(--sur);color:var(--ink);display:grid;place-items:center;font-size:16px;transition:transform .3s}
+.xbtn:hover{transform:rotate(90deg)}
+.cursordot{position:fixed;left:-100px;top:-100px;z-index:2147483647;pointer-events:none;width:14px;height:14px;border-radius:999px;background:#fff;mix-blend-mode:difference;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;transition:width .3s cubic-bezier(.22,1,.36,1),height .3s cubic-bezier(.22,1,.36,1),background .2s}
+.cursordot.hov{width:36px;height:36px}
+.cursordot.view{width:72px;height:40px;background:#fff;mix-blend-mode:normal;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.vtext{font-family:'Archivo',sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;color:#0F0E0C;opacity:0;transition:opacity .2s}
+.cursordot.view .vtext{opacity:1;transition-delay:.1s}
+</style>
+</helmet>
+<nav class="grid ac navbar" style="grid-template-columns:1fr auto 1fr;padding:20px 64px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line)" data-screen-label="Nav">
+<a href="#top" class="fx ac" style="justify-self:start"><img class="logoimg" src="assets/logo.svg" alt="akhilux" style="height:36px;width:auto;display:block"></a>
+<button class="dotsbtn" onClick="{{ openMenu }}" aria-label="Open menu"><span class="dgrid"><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span></span></button>
+<a class="btn" href="#contact" style="padding:12px 22px;justify-self:end">Contact now</a>
+</nav>
+<div class="menu {{ menuCls }}" data-screen-label="Fullscreen Menu">
+<div class="grid ac" style="grid-template-columns:1fr auto 1fr">
+<img class="logoimg" src="assets/logo.svg" alt="akhilux" style="height:30px;width:auto;justify-self:start">
+<button class="xbtn" onClick="{{ closeMenu }}" aria-label="Close menu">✕</button>
+<button class="btn" onClick="{{ toggleTheme }}" style="padding:12px 22px;justify-self:end">{{ themeLabel }}</button>
+</div>
+<div class="col" style="display:flex;flex-direction:column;align-items:center;gap:4px">
+<div class="mline"><a class="mlink" href="#top" onClick="{{ closeMenu }}"><span class="msup">(1)</span><span class="roll"><span>Home</span><span class="rt2">Home</span></span></a></div>
+<div class="mline"><a class="mlink" href="#work" onClick="{{ closeMenu }}"><span class="msup">(2)</span><span class="roll"><span>Work</span><span class="rt2">Work</span></span></a></div>
+<div class="mline"><a class="mlink" href="#contact" onClick="{{ closeMenu }}"><span class="msup">(3)</span><span class="roll"><span>Contact</span><span class="rt2">Contact</span></span></a></div>
+</div>
+<div class="fx ac jb">
+<span class="mono mut fs12" style="letter-spacing:.14em">©2026 ALL RIGHTS RESERVED</span>
+<div class="fx ac gap24"><a class="navlink" href="https://www.instagram.com/akhilu.ash/" target="_blank">Instagram ↗</a><a class="navlink" href="https://www.linkedin.com/in/akhiljith-ashok/" target="_blank">LinkedIn ↗</a><a class="navlink" href="https://www.behance.net/akhiljithashok" target="_blank">Behance ↗</a></div>
+</div>
+</div>
+
+<header id="top" class="wrap" style="padding:130px 64px 40px" data-screen-label="Hero">
+<div class="fx ac mb16 fadeup" style="justify-content:center;margin-bottom:36px"><span class="kicker" style="font-size:clamp(13px,1.1vw,15px)">Hey there, I'm</span></div>
+<h1 class="disp rv" style="text-align:center;white-space:nowrap;font-size:clamp(56px,9.5vw,175px)"><span class="rvi" style="--d:.1s">Akhiljith Ashok<span class="acc">.</span></span></h1>
+
+<div class="col mt16 fadeup" style="display:flex;flex-direction:column;align-items:center;gap:24px;margin-top:44px;--d:.25s">
+<p class="lead mut mono" style="max-width:1000px;margin:0;text-align:center;font-size:clamp(13px,1.3vw,17px);font-weight:400;letter-spacing:.02em">I design simple, intuitive products — from research and flows to polished, shippable UI.<br>5+ years turning complex systems into experiences people actually enjoy using.</p>
+</div>
+<div class="fx ac jb fadeup" style="margin-top:64px;--d:.35s"><span class="mut" style="font-size:clamp(13px,1.1vw,15px);font-weight:500;text-transform:uppercase;letter-spacing:.08em">Product Designer — UI/UX</span><span class="mut" style="font-size:clamp(13px,1.1vw,15px);font-weight:500;text-transform:uppercase;letter-spacing:.08em">Based in Keralam, India</span></div>
+<div class="marq"><div class="mtrack">
+<span class="mitem">Product Design<span class="dot"></span>UI/UX Design<span class="dot"></span>User Research<span class="dot"></span>Wireframing & Prototyping<span class="dot"></span>Design Systems<span class="dot"></span>Information Architecture<span class="dot"></span>Usability Testing<span class="dot"></span>User Journey Mapping<span class="dot"></span>Interaction Design<span class="dot"></span>Vibe Coding<span class="dot"></span></span>
+<span class="mitem">Product Design<span class="dot"></span>UI/UX Design<span class="dot"></span>User Research<span class="dot"></span>Wireframing & Prototyping<span class="dot"></span>Design Systems<span class="dot"></span>Information Architecture<span class="dot"></span>Usability Testing<span class="dot"></span>User Journey Mapping<span class="dot"></span>Interaction Design<span class="dot"></span>Vibe Coding<span class="dot"></span></span>
+</div></div>
+</header>
+<section id="work" class="sec" style="border-top:none" data-screen-label="Featured Work"><div class="wrap">
+<div class="fx jb mb16" style="align-items:flex-end"><h2 class="disp h2 m0 rv"><span class="rvi">Featured<br>Work<span class="acc">.</span></span></h2><p class="mut" style="max-width:380px;margin:0">Selected case studies. Client work is anonymized where required by NDA.</p></div>
+<div class="grid" style="grid-template-columns:1fr 1fr;gap:24px;margin-top:48px">
+<a class="card fadeup" href="Instants Case Study.dc.html"><div class="thumb"><image-slot id="proj-instants" shape="rect" placeholder="Instants case study cover"></image-slot></div><div class="cmeta"><div><div class="fw7 fs20">Instants — Rethinking ephemeral sharing</div><div class="mut fs13 mt8">UX case study · Social app feature redesign</div></div><div class="fx gap8"><span class="tag hl">2026</span><span class="tag">Case study</span></div></div></a>
+<a class="card fadeup" href="#work"><div class="thumb"><image-slot id="proj-comunify" shape="rect" placeholder="ComUnify product cover"></image-slot></div><div class="cmeta"><div><div class="fw7 fs20">Community living platform</div><div class="mut fs13 mt8">Product design · Concept → market · NDA</div></div><div class="fx gap8"><span class="tag">2021–26</span><span class="tag">Product</span></div></div></a>
+<a class="card fadeup" href="#work"><div class="thumb"><image-slot id="proj-ds" shape="rect" placeholder="Design system cover"></image-slot></div><div class="cmeta"><div><div class="fw7 fs20">A design system that cut build time 30%</div><div class="mut fs13 mt8">Design systems · Figma · Handoff</div></div><div class="fx gap8"><span class="tag">2024–26</span><span class="tag">Systems</span></div></div></a>
+<a class="card fadeup" href="#work"><div class="thumb"><image-slot id="proj-4" shape="rect" placeholder="Third case study cover"></image-slot></div><div class="cmeta"><div><div class="fw7 fs20">Onboarding that converts</div><div class="mut fs13 mt8">UX research · Usability testing</div></div><div class="fx gap8"><span class="tag">2025</span><span class="tag">Research</span></div></div></a>
+</div>
+</div></section>
+<section id="about" class="sec" data-screen-label="About"><div class="wrap grid" style="grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:64px">
+<div><h2 class="disp h2 m0 rv"><span class="rvi">More<br>About<span class="acc">.</span></span></h2><div class="mt16" style="width:100%;height:420px"></div></div>
+<div class="col" style="display:flex;flex-direction:column;justify-content:space-between;gap:40px">
+<p class="lead m0">I'm a product designer who blends traditional design methodology with modern, AI-augmented workflows — translating complex user needs into simple, intuitive experiences without sacrificing craft or usability.</p>
+<p class="mut m0" style="font-size:16px;line-height:1.7">Over five years I've taken a property-tech product from internal incubation to market, governed a unified design system that cut front-end timelines by 30%, and run research, testing and journey mapping to keep decisions grounded in real user behavior. A team player who loves working with all types of people.</p>
+<div>
+<div class="stat fadeup"><span class="kicker">Years of experience</span><span class="statnum">5+</span></div>
+<div class="stat fadeup"><span class="kicker">Product shipped concept → market</span><span class="statnum">01</span></div>
+<div class="stat fadeup" style="border-bottom:1px solid var(--line)"><span class="kicker">Front-end time saved via design system</span><span class="statnum">30%</span></div>
+</div>
+<a class="btn" href="https://drive.google.com/file/d/1Issw97gs-kreC7QWev66jO6YC2FdF0L0/view?usp=drive_link" target="_blank" style="align-self:flex-start">Download resume</a>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Expertise"><div class="wrap">
+<h2 class="disp h2 m0 rv"><span class="rvi">My<br>Expertise<span class="acc">.</span></span></h2>
+<div class="mt16" style="margin-top:48px">
+<div class="xrow fadeup"><span class="mono mut fs13">(01)</span><h3 class="disp m0 fs22" style="font-size:34px">Product &amp; App Design</h3><p class="mut m0" style="line-height:1.6">End-to-end product design — intuitive navigation, information architecture and interfaces that make complex features feel accessible.</p></div>
+<div class="xrow fadeup"><span class="mono mut fs13">(02)</span><h3 class="disp m0" style="font-size:34px">UX Research</h3><p class="mut m0" style="line-height:1.6">User research, personas, journey mapping and usability testing — so design decisions are grounded in evidence, not opinion.</p></div>
+<div class="xrow fadeup"><span class="mono mut fs13">(03)</span><h3 class="disp m0" style="font-size:34px">Design Systems</h3><p class="mut m0" style="line-height:1.6">Unified, governed component libraries in Figma that keep products consistent and make designer–developer handoff fast.</p></div>
+<div class="xrow fadeup"><span class="mono mut fs13">(04)</span><h3 class="disp m0" style="font-size:34px">Web Design</h3><p class="mut m0" style="line-height:1.6">Responsive sites and microinteractions built with modern no-code and AI tools — Framer, Webflow, and beyond.</p></div>
+</div>
+</div></section>
+<section id="experience" class="sec" data-screen-label="Experience"><div class="wrap">
+<h2 class="disp h2 m0 rv"><span class="rvi">Experience<span class="acc">.</span></span></h2>
+<div style="margin-top:48px">
+<div class="erow fadeup"><div><div class="fw7" style="font-size:22px">COMUNIFY SERVICES LLP</div><div class="kicker mt8">Product Designer</div></div><p class="mut m0" style="line-height:1.6">Own the product design lifecycle for a community-living platform — strategy with PMs and engineers, design-system governance, and research-led onboarding optimization.</p><span class="mono mut fs13 tc" style="text-align:right">2026 — Present</span></div>
+<div class="erow fadeup"><div><div class="fw7" style="font-size:22px">ACROCEDE TECHNOLOGIES</div><div class="kicker mt8">Associate UI/UX Designer</div></div><p class="mut m0" style="line-height:1.6">Spearheaded visual and interaction design for the core product suite, leading it from internal incubation to a mature market product. Wireframes, prototypes, research and Agile delivery with engineering.</p><span class="mono mut fs13" style="text-align:right">2021 — 2026</span></div>
+<div class="erow fadeup"><div><div class="fw7" style="font-size:22px">TECHBYHEART, KOCHI</div><div class="kicker mt8">UI/UX Trainee · Intern</div></div><p class="mut m0" style="line-height:1.6">Translated project requirements into polished interfaces; built responsive web and mobile UIs in Figma, Adobe XD and Framer.</p><span class="mono mut fs13" style="text-align:right">2021</span></div>
+</div>
+</div></section>
+<sc-if value="{{ showStack }}" hint-placeholder-val="{{ true }}">
+<section class="sec" data-screen-label="Stack"><div class="wrap">
+<h2 class="disp h2 m0 rv"><span class="rvi">Favourite<br>Stack<span class="acc">.</span></span></h2>
+<div class="grid mt16" style="grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px">
+<div class="card fadeup" style="padding:28px"><div class="fw7 fs20">Figma</div><div class="kicker mt8">Design · Systems</div><p class="mut fs13 mt16" style="line-height:1.6;margin-bottom:0">Daily driver for product design, prototyping and design-system governance.</p></div>
+<div class="card fadeup" style="padding:28px"><div class="fw7 fs20">Framer</div><div class="kicker mt8">Web design</div><p class="mut fs13 mt16" style="line-height:1.6;margin-bottom:0">Design-to-publish sites with real interactions, no handoff needed.</p></div>
+<div class="card fadeup" style="padding:28px"><div class="fw7 fs20">Claude</div><div class="kicker mt8">AI-augmented design</div><p class="mut fs13 mt16" style="line-height:1.6;margin-bottom:0">Rapid prototyping, research synthesis and vibe-coded working prototypes.</p></div>
+<div class="card fadeup" style="padding:28px"><div class="fw7 fs20">Adobe Suite</div><div class="kicker mt8">Visual craft</div><p class="mut fs13 mt16" style="line-height:1.6;margin-bottom:0">Photoshop and Illustrator for imagery, iconography and brand assets.</p></div>
+</div>
+</div></section>
+</sc-if>
+<section id="contact" class="sec" data-screen-label="Contact"><div class="wrap">
+<h2 class="disp m0 rv" style="font-size:clamp(56px,9vw,150px)"><span class="rvi">Let's work<br>together<span class="acc">.</span></span></h2>
+<div class="grid" style="grid-template-columns:1.1fr 1fr;gap:64px;margin-top:56px">
+<div class="col" style="display:flex;flex-direction:column;gap:24px">
+<div class="field"><span class="lbl">Name</span><input id="cf-name" class="inp" placeholder="Your name"></div>
+<div class="field"><span class="lbl">Email</span><input id="cf-email" class="inp" placeholder="you@company.com"></div>
+<div class="field"><span class="lbl">Message</span><textarea id="cf-msg" class="inp" rows="5" placeholder="Tell me about the role or project…"></textarea></div>
+<button class="btn solid" onClick="{{ sendMail }}" style="align-self:flex-start">Send message</button>
+</div>
+<div class="col" style="display:flex;flex-direction:column;gap:20px;justify-content:flex-end">
+<p class="mut m0" style="line-height:1.7">Open to Product Designer and UI/UX Designer roles. Prefer email? Reach me directly:</p>
+<a class="fw6 fs20" href="mailto:akhiljithashok@gmail.com">akhiljithashok@gmail.com</a>
+<a class="fw6 fs20" href="tel:+919072193348">+91 90721 93348</a>
+<div class="fx gap12 wrap mt16"><a class="slink" href="https://www.linkedin.com/in/akhiljith-ashok/" target="_blank">LinkedIn</a><a class="slink" href="https://www.behance.net/akhiljithashok" target="_blank">Behance</a><a class="slink" href="https://www.instagram.com/akhilu.ash/" target="_blank">Instagram</a><a class="slink" href="https://x.com/AkhiljithAshok" target="_blank">Twitter</a></div>
+</div>
+</div>
+</div></section>
+<footer class="fx ac jb" style="padding:28px 64px;border-top:1px solid var(--line)" data-screen-label="Footer">
+<span class="fx ac gap8 mono mut fs12" style="font-size: 14px">©2026 akhilux</span>
+
+<img src="assets/logo.svg" alt="akhilux" style="height: 28px; width: 70px; display: block"><a class="navlink" href="#top">Go back to top ↑</a>
+</footer>
+<div style="width:0;height:0;overflow:hidden"><x-import component-from-global-scope="image-slot" from="./image-slot.js" hint-size="0,0"></x-import></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#C9F24E&quot;,&quot;options&quot;:[&quot;#C9F24E&quot;,&quot;#FF7A45&quot;,&quot;#6EE7F2&quot;,&quot;#9D8CFF&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;showStack&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+class Component extends DCLogic {
+  state = { menuOpen: false, light: false };
+  componentDidMount() {
+    this.applyAccent();
+    const reveal = () => {
+      const vh = window.innerHeight;
+      document.querySelectorAll('.rv:not(.in),.fadeup:not(.in)').forEach(el => {
+        if (el.getBoundingClientRect().top < vh * 0.92) el.classList.add('in');
+      });
+    };
+    this.revealFn = reveal;
+    requestAnimationFrame(reveal);
+    this.revealTimer = setInterval(() => {
+      reveal();
+      if (!document.querySelector('.rv:not(.in),.fadeup:not(.in)')) clearInterval(this.revealTimer);
+    }, 200);
+    let c = document.getElementById('om-cursor');
+    if (!c) {
+      c = document.createElement('div');
+      c.id = 'om-cursor';
+      c.className = 'cursordot';
+      c.innerHTML = '<span class="vtext">VIEW</span>';
+      document.body.appendChild(c);
+    }
+    this.cursorEl = c;
+    this.cursorMove = e => {
+      c.style.left = e.clientX + 'px';
+      c.style.top = e.clientY + 'px';
+      const t = e.target instanceof Element ? e.target : null;
+      const card = t && t.closest('#work .card');
+      const hov = t && t.closest('a,button,input,textarea,.inp');
+      c.classList.toggle('view', !!card);
+      c.classList.toggle('hov', !card && !!hov);
+    };
+    document.addEventListener('mousemove', this.cursorMove);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('mousemove', this.cursorMove);
+    if (this.cursorEl) this.cursorEl.remove();
+    if (this.revealTimer) clearInterval(this.revealTimer);
+  }
+  componentDidUpdate() {
+    this.applyAccent();
+    document.documentElement.classList.toggle('light', this.state.light);
+  }
+  applyAccent() {
+    const acc = this.props.accent ?? '#C9F24E';
+    document.documentElement.style.setProperty('--acc', acc);
+  }
+  renderVals() {
+    return {
+      showStack: this.props.showStack ?? true,
+      menuCls: this.state.menuOpen ? 'open' : '',
+      themeLabel: this.state.light ? 'Switch to dark mode' : 'Switch to light mode',
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      toggleTheme: () => this.setState(s => ({ light: !s.light })),
+      sendMail: () => {
+        const v = id => (document.getElementById(id) || {}).value || '';
+        const body = encodeURIComponent(v('cf-msg') + '\n\n— ' + v('cf-name') + ' (' + v('cf-email') + ')');
+        const subj = encodeURIComponent('Portfolio contact — ' + v('cf-name'));
+        window.location.href = 'mailto:akhiljithashok@gmail.com?subject=' + subj + '&body=' + body;
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

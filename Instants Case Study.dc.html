@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--acc:#C9F24E;--bg:#0F0E0C;--sur:#171512;--line:#2A2723;--ink:#ECE8E0;--mut:#8F8A80}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Archivo',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--ink);text-decoration:none}a:hover{color:var(--acc)}
+.disp{font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:.01em;line-height:.95;margin:0}
+.mono{font-family:'JetBrains Mono',monospace}
+.mut{color:var(--mut)}
+.acc{color:var(--acc)}
+.sec{padding:100px 64px;border-top:1px solid var(--line)}
+.wrap{max-width:1180px;margin:0 auto}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+.h2{font-size:clamp(40px,5.5vw,76px)}
+.tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:6px 12px;white-space:nowrap}
+.tag.hl{color:#0F0E0C;background:var(--acc);border-color:var(--acc)}
+.card{border:1px solid var(--line);border-radius:20px;background:var(--sur);padding:28px}
+.body{font-size:17px;line-height:1.7;color:var(--mut);margin:0}
+.body strong{color:var(--ink);font-weight:600}
+.navlink{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.navlink:hover{color:var(--acc)}
+.num{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--acc)}
+.h3{font-size:24px;font-weight:700;margin:0}
+.metric{border-top:1px solid var(--line);padding:20px 0}
+.mnum{font-family:'Anton',sans-serif;font-size:52px;line-height:1}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.quote{font-size:20px;line-height:1.5;font-weight:500;margin:0;border-left:2px solid var(--acc);padding-left:20px}
+.rv{display:block;overflow:hidden}
+.rvi{display:inline-block;transform:translateY(115%);transition:transform .9s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
+.rv.in .rvi{transform:translateY(0)}
+.fadeup{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .8s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
+.fadeup.in{opacity:1;transform:translateY(0)}
+.ph{width:100%;max-width:280px;aspect-ratio:9/19;border-radius:36px;border:1px solid var(--line);background:#131118;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45);margin:0 auto}
+.sb{display:flex;align-items:center;justify-content:space-between;padding:12px 18px 8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mut)}
+.phlabel{text-align:center;margin-top:18px}
+.phlabel .t{font-weight:700;font-size:15px}
+.phlabel .s{color:var(--mut);font-size:13px;margin-top:4px;line-height:1.5}
+.av{border-radius:50%;flex-shrink:0}
+.av1{background:linear-gradient(135deg,#E8A87C,#C06C84)}
+.av2{background:linear-gradient(135deg,#6C9BC0,#84C0A8)}
+.av3{background:linear-gradient(135deg,#C9F24E,#5B8C2A)}
+.av4{background:linear-gradient(135deg,#B08CC9,#6C84C0)}
+.ring{padding:2px;border:2px solid var(--acc);border-radius:50%}
+.imgph{background:repeating-linear-gradient(45deg,#1D1A24,#1D1A24 10px,#191621 10px,#191621 20px);display:flex;align-items:center;justify-content:center}
+.imgph span{font-family:'JetBrains Mono',monospace;font-size:10px;color:#5E5870;letter-spacing:.1em;text-transform:uppercase}
+.wf{background:#1A1815;border:1px dashed #3A362F;border-radius:8px}
+.wfl{font-family:'JetBrains Mono',monospace;font-size:9px;color:#6E685C;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;height:100%}
+.pill{border-radius:999px;padding:10px 16px;font-size:12px;font-weight:600;text-align:center}
+.pilla{background:var(--acc);color:#0F0E0C}
+.pillb{border:1px solid var(--line);color:var(--ink)}
+.prob{display:grid;grid-template-columns:64px minmax(0,1fr);gap:20px;padding:32px 0;border-top:1px solid var(--line);align-items:start}
+.prob:last-child{border-bottom:1px solid var(--line)}
+.ba{display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr);gap:20px;align-items:center;padding:24px 0;border-top:1px solid var(--line)}
+.ba:last-child{border-bottom:1px solid var(--line)}
+.bcell{font-size:15px;line-height:1.6}
+.arr{color:var(--acc);font-size:20px;text-align:center}
+.frow{display:flex;align-items:center;gap:10px;padding:12px 16px}
+.fbtn{width:34px;height:34px;border-radius:50%;background:#221F2B;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--ink)}
+.seg{height:3px;border-radius:2px;background:#3A3547;flex:1}
+.seg.on{background:#fff}
+.chip{font-size:11px;padding:6px 12px;border-radius:999px;border:1px solid #2E2A3A;color:#9B94AD}
+.goal{display:flex;gap:14px;align-items:start}
+.gnum{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--acc);padding-top:3px}
+.persona{border:1px solid var(--line);border-radius:20px;background:var(--sur);padding:28px;display:flex;flex-direction:column;gap:16px}
+.ptop{display:flex;align-items:center;gap:16px}
+.plist{margin:0;padding-left:18px;color:var(--mut);font-size:14px;line-height:1.8}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border:1px solid var(--ink);border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;background:none;color:var(--ink);transition:all .2s}
+.btn:hover{background:var(--acc);border-color:var(--acc);color:#0F0E0C}
+.navbar{background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px)}
+.dotsbtn{width:46px;height:46px;border-radius:50%;border:none;background:transparent;display:grid;place-items:center;transition:background .25s}
+.dotsbtn:hover{background:var(--sur)}
+.dgrid{display:grid;grid-template-columns:3px 3px;gap:9px;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.dotsbtn:hover .dgrid{transform:rotate(45deg)}
+.d{width:3px;height:3px;border-radius:50%;background:var(--ink)}
+.menu{position:fixed;inset:0;background:var(--bg);z-index:50;display:flex;flex-direction:column;justify-content:space-between;padding:24px 64px;box-sizing:border-box;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s}
+.menu.open{opacity:1;visibility:visible}
+.mline{overflow:hidden;text-align:center;padding:0 30px}
+.mlink{display:inline-block;font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(56px,8.5vw,110px);line-height:1.02;color:var(--ink);transform:translateY(110%);transition:transform .25s ease,color .2s;position:relative}
+.roll{display:block;position:relative;transition:transform .55s cubic-bezier(.22,1,.36,1)}
+.rt2{position:absolute;top:100%;left:0;width:100%}
+.mlink:hover .roll{transform:translateY(-100%)}
+.msup{font-family:'JetBrains Mono',monospace;font-size:14px;position:absolute;top:10px;left:-26px;color:var(--ink);opacity:0;transition:opacity .25s}
+.mlink:hover .msup{opacity:1}
+.menu.open .mline:nth-child(1) .mlink{transition-delay:.2s}
+.menu.open .mline:nth-child(2) .mlink{transition-delay:.28s}
+.menu.open .mline:nth-child(3) .mlink{transition-delay:.36s}
+.menu.open .mlink{transform:translateY(0);transition:transform .7s cubic-bezier(.16,1,.3,1),color .2s}
+.xbtn{width:46px;height:46px;border-radius:50%;border:none;background:var(--sur);color:var(--ink);display:grid;place-items:center;font-size:16px;transition:transform .3s}
+.xbtn:hover{transform:rotate(90deg)}
+</style>
+</helmet>
+<nav class="grid ac navbar" style="grid-template-columns:1fr auto 1fr;padding:20px 64px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line)" data-screen-label="Nav">
+<a href="Portfolio Home.dc.html" class="fx ac" style="justify-self:start"><img src="assets/logo.svg" alt="akhilux" style="height:36px;width:auto;display:block"></a>
+<button class="dotsbtn" onClick="{{ openMenu }}" aria-label="Open menu"><span class="dgrid"><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span></span></button>
+<a class="navlink" href="Portfolio Home.dc.html" style="justify-self:end">← Back home</a>
+</nav>
+<div class="menu {{ menuCls }}" data-screen-label="Fullscreen Menu">
+<div class="grid ac" style="grid-template-columns:1fr auto 1fr">
+<img src="assets/logo.svg" alt="akhilux" style="height:30px;width:auto;justify-self:start">
+<button class="xbtn" onClick="{{ closeMenu }}" aria-label="Close menu">✕</button>
+<span></span>
+</div>
+<div class="col" style="display:flex;flex-direction:column;align-items:center;gap:4px">
+<div class="mline"><a class="mlink" href="Portfolio Home.dc.html"><span class="msup">(1)</span><span class="roll"><span>Home</span><span class="rt2">Home</span></span></a></div>
+<div class="mline"><a class="mlink" href="Portfolio Home.dc.html#work"><span class="msup">(2)</span><span class="roll"><span>Work</span><span class="rt2">Work</span></span></a></div>
+<div class="mline"><a class="mlink" href="Portfolio Home.dc.html#contact"><span class="msup">(3)</span><span class="roll"><span>Contact</span><span class="rt2">Contact</span></span></a></div>
+</div>
+<div class="fx ac jb">
+<span class="mono mut fs12" style="letter-spacing:.14em">©2026 ALL RIGHTS RESERVED</span>
+<div class="fx ac gap24"><a class="navlink" href="https://www.instagram.com/akhilu.ash/" target="_blank">Instagram ↗</a><a class="navlink" href="https://www.linkedin.com/in/akhiljith-ashok/" target="_blank">LinkedIn ↗</a><a class="navlink" href="https://www.behance.net/akhiljithashok" target="_blank">Behance ↗</a></div>
+</div>
+</div>
+<header class="wrap" style="padding:110px 64px 80px" data-screen-label="Case Study Hero">
+<div class="fx gap8 wrap" style="flex-wrap:wrap;margin-bottom:28px"><span class="tag hl">UX Case Study</span><span class="tag">Mobile</span><span class="tag">Social</span><span class="tag">Feature Redesign</span></div>
+<h1 class="disp rv" style="font-size:clamp(52px,8vw,130px)"><span class="rvi" style="--d:.1s">Rethinking<br>Instants<span class="acc">.</span></span></h1>
+<p class="body" style="max-width:720px;margin-top:28px;font-size:19px">Instants is an ephemeral photo-sharing feature inside a leading social app — and almost nobody uses it. I dug into why, then redesigned its placement, viewing experience, and sharing flow around one principle: <strong>the user should always know what's happening, and who it's happening with.</strong></p>
+<div class="grid4" style="margin-top:56px">
+<div><div class="kicker">Role</div><div class="fw6 mt8" style="font-size:15px">Product Designer — solo</div></div>
+<div><div class="kicker">Timeline</div><div class="fw6 mt8" style="font-size:15px">3 weeks · 2026</div></div>
+<div><div class="kicker">Platform</div><div class="fw6 mt8" style="font-size:15px">iOS · Android</div></div>
+<div><div class="kicker">Methods</div><div class="fw6 mt8" style="font-size:15px">Heuristics · Interviews · Usability tests</div></div>
+</div>
+<sc-if value="{{ showDisclaimer }}" hint-placeholder-val="{{ true }}">
+<p class="mono mut" style="font-size:11px;letter-spacing:.06em;margin-top:40px;max-width:640px;line-height:1.7">This is an unsolicited concept study. I am not affiliated with the company; all product UI shown is my own original design, and the feature is examined generically.</p>
+</sc-if>
+</header>
+<section class="sec" data-screen-label="TLDR"><div class="wrap grid2" style="gap:64px">
+<div><span class="kicker">TL;DR</span><h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Nobody could find it. Nobody trusted it<span class="acc">.</span></span></h2></div>
+<div class="col" style="display:flex;flex-direction:column;gap:20px">
+<p class="body">Instants was buried as small cards inside the chat screen, gave no clue whose content you were viewing, and — worst of all — <strong>captured photos were sent to all followers instantly, with no confirmation and no audience control.</strong></p>
+<p class="body">I moved the feature to a first-class tray on the home feed, redesigned the viewer around clear attribution and navigation, and inserted a lightweight consent step with audience selection before anything is shared.</p>
+<div class="grid3" style="gap:16px;margin-top:8px">
+<div class="metric fadeup"><div class="mnum">7<span class="acc">/</span>8</div><div class="kicker mt8">users had never used Instants</div></div>
+<div class="metric fadeup"><div class="mnum">0<span class="acc">/</span>8</div><div class="kicker mt8">found it without help</div></div>
+<div class="metric fadeup"><div class="mnum">5<span class="acc">/</span>5</div><div class="kicker mt8">task success after redesign</div></div>
+</div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Context"><div class="wrap grid2" style="gap:64px">
+<div><span class="kicker">01 — Context</span><h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">What is Instants?</span></h2></div>
+<div class="col" style="display:flex;flex-direction:column;gap:20px">
+<p class="body">Instants lets you capture a quick, unedited photo that disappears after 24 hours — a "real moment" counterweight to polished feed posts. Conceptually it's strong: low-pressure, authentic sharing with the people who already follow you.</p>
+<p class="body">In practice, the feature ships as <strong>a stack of small cards tucked into the bottom-right of the chat screen.</strong> It competes with message threads for attention, looks like a promotional widget, and behaves like neither a story nor a post. Most users scroll straight past it — and the few who tap in rarely come back.</p>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Problems"><div class="wrap">
+<span class="kicker">02 — Audit</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Five ways it fails<span class="acc">.</span></span></h2>
+<div style="margin-top:48px">
+<div class="prob fadeup"><span class="num">(01)</span><div><div class="h3">Buried placement</div><p class="body" style="margin-top:10px">A social broadcast feature lives inside a 1-to-1 messaging surface. Users don't form the habit because the entry point contradicts the mental model — chat is where I talk to <strong>one person</strong>, not where I broadcast to everyone.</p></div></div>
+<div class="prob fadeup"><span class="num">(02)</span><div><div class="h3">No attribution</div><p class="body" style="margin-top:10px">Tapping a card opens a carousel of photos with <strong>no clear indication of whose Instants you're viewing.</strong> Content without a face attached feels like noise — and slightly creepy.</p></div></div>
+<div class="prob fadeup"><span class="num">(03)</span><div><div class="h3">Unlearnable navigation</div><p class="body" style="margin-top:10px">Moving between Instants relies on undiscoverable gestures. First-time users tap, swipe, and give up — there are no affordances, no progress indication, no way to tell where you are in the stack.</p></div></div>
+<div class="prob fadeup"><span class="num">(04)</span><div><div class="h3">Capture = publish, silently</div><p class="body" style="margin-top:10px">The moment you take a photo, it's sent to your followers. <strong>No preview, no confirmation, no undo.</strong> This violates the most basic expectation of consent — and one accidental capture is enough to make a user never open the camera again.</p></div></div>
+<div class="prob fadeup"><span class="num">(05)</span><div><div class="h3">No audience control</div><p class="body" style="margin-top:10px">Everything goes to everyone. There is no close-friends list, no per-Instant audience, no way to exclude your boss, your relatives, or that recruiter who followed you last week.</p></div></div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Research"><div class="wrap grid2" style="gap:64px">
+<div style="position:sticky;top:120px;align-self:start"><span class="kicker">03 — Research</span><h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Testing my assumptions</span></h2><p class="body" style="margin-top:20px">A heuristic evaluation against Nielsen's 10 usability principles, then moderated sessions with 8 active users of the app (ages 21–34, daily users) attempting three tasks: find Instants, view a friend's, and post one.</p></div>
+<div class="col" style="display:flex;flex-direction:column;gap:28px">
+<div class="card fadeup"><div class="kicker">Finding 1 — Discovery</div><p class="body" style="margin-top:12px">0 of 8 found Instants unaided within 2 minutes. When shown its location, the most common reaction was <strong>"why is it in chat?"</strong></p></div>
+<div class="card fadeup"><div class="kicker">Finding 2 — Attribution</div><p class="body" style="margin-top:12px">6 of 8 asked some version of "whose photo is this?" within the first three viewed Instants. Two assumed the content was ads.</p></div>
+<div class="card fadeup"><div class="kicker">Finding 3 — Trust</div><p class="body" style="margin-top:12px">8 of 8 were surprised captures auto-send. 5 said they would <strong>not use the camera again</strong> after learning this. Trust, once broken here, did not recover within the session.</p></div>
+<blockquote class="quote fadeup">"Wait — it already sent that? To everyone? That's horrifying."<br><span class="kicker" style="display:inline-block;margin-top:12px">— P6, usability session</span></blockquote>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Personas"><div class="wrap">
+<span class="kicker">04 — Personas</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Two people to design for<span class="acc">.</span></span></h2>
+<div class="grid2" style="margin-top:48px">
+<div class="persona fadeup">
+<div class="ptop"><div class="av av1" style="width:56px;height:56px"></div><div><div class="h3">Meera, 24</div><div class="kicker mt8">The daily sharer</div></div></div>
+<p class="body" style="font-size:15px">Posts stories most days. Loves the idea of low-pressure "real" moments but abandoned Instants after one session because she couldn't tell who saw what.</p>
+<div><div class="kicker" style="margin-bottom:8px">Needs</div><ul class="plist"><li>Effortless posting — under 10 seconds</li><li>Certainty about who sees each post</li><li>To see friends' moments without hunting</li></ul></div>
+</div>
+<div class="persona fadeup">
+<div class="ptop"><div class="av av2" style="width:56px;height:56px"></div><div><div class="h3">Arjun, 29</div><div class="kicker mt8">The cautious professional</div></div></div>
+<p class="body" style="font-size:15px">Follows colleagues and clients alongside friends. Views often, posts rarely — and only when he's certain of the audience. One accidental share would be a career problem.</p>
+<div><div class="kicker" style="margin-bottom:8px">Needs</div><ul class="plist"><li>Explicit confirmation before anything is shared</li><li>A trusted, reusable close-friends list</li><li>An obvious way to undo mistakes</li></ul></div>
+</div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Design Goals"><div class="wrap grid2" style="gap:64px">
+<div><span class="kicker">05 — Direction</span><h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">How might we<span class="acc">…</span></span></h2></div>
+<div class="col" style="display:flex;flex-direction:column;gap:26px">
+<div class="goal fadeup"><span class="gnum">G1</span><p class="body"><strong>Make Instants findable</strong> — move it where broadcast content already lives, with a clear entry point on the home feed.</p></div>
+<div class="goal fadeup"><span class="gnum">G2</span><p class="body"><strong>Attribute everything</strong> — the author's face and name are visible before, during, and after viewing.</p></div>
+<div class="goal fadeup"><span class="gnum">G3</span><p class="body"><strong>Teach navigation in one glance</strong> — visible progress, standard tap zones, no hidden gestures required.</p></div>
+<div class="goal fadeup"><span class="gnum">G4</span><p class="body"><strong>Never share without consent</strong> — a preview step with explicit audience choice before anything leaves the phone, plus a short undo window after.</p></div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Wireframes"><div class="wrap">
+<span class="kicker">06 — Exploration</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Placement, then flow<span class="acc">.</span></span></h2>
+<p class="body" style="max-width:680px;margin-top:20px">I explored three placements — inside the camera tab, merged into the stories tray, and a dedicated tray on the home feed. The dedicated tray won: it keeps Instants' "unpolished" identity distinct from stories while inheriting the feed's daily traffic.</p>
+<div class="grid3" style="margin-top:48px">
+<div>
+<div class="ph" style="aspect-ratio:9/16;max-width:240px">
+<div class="wf" style="height:34px;margin:14px 14px 8px"><div class="wfl">nav / logo</div></div>
+<div class="wf" style="height:74px;margin:0 14px 8px;border-color:var(--acc)"><div class="wfl" style="color:var(--acc)">instants tray ← new</div></div>
+<div class="wf" style="flex:1;margin:0 14px 8px"><div class="wfl">feed post</div></div>
+<div class="wf" style="height:56px;margin:0 14px 14px"><div class="wfl">tab bar</div></div>
+</div>
+<div class="phlabel"><div class="t">A — Feed tray</div><div class="s">First-class entry point above the feed. Chosen.</div></div>
+</div>
+<div>
+<div class="ph" style="aspect-ratio:9/16;max-width:240px">
+<div class="wf" style="height:34px;margin:14px 14px 8px"><div class="wfl">viewer top: avatar + name</div></div>
+<div class="wf" style="flex:1;margin:0 14px 8px"><div class="wfl">photo + tap zones L/R</div></div>
+<div class="wf" style="height:44px;margin:0 14px 14px"><div class="wfl">reply / react bar</div></div>
+</div>
+<div class="phlabel"><div class="t">B — Viewer skeleton</div><div class="s">Attribution pinned top, segmented progress, standard tap zones.</div></div>
+</div>
+<div>
+<div class="ph" style="aspect-ratio:9/16;max-width:240px">
+<div class="wf" style="flex:1;margin:14px 14px 8px"><div class="wfl">capture preview</div></div>
+<div class="wf" style="height:88px;margin:0 14px 8px;border-color:var(--acc)"><div class="wfl" style="color:var(--acc)">audience sheet ← new step</div></div>
+<div class="wf" style="height:44px;margin:0 14px 14px"><div class="wfl">send cta</div></div>
+</div>
+<div class="phlabel"><div class="t">C — Consent step</div><div class="s">Preview → choose audience → send. Nothing auto-publishes.</div></div>
+</div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Final UI"><div class="wrap">
+<span class="kicker">07 — Final Design</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">The redesigned flow<span class="acc">.</span></span></h2>
+<div class="grid4" style="margin-top:56px;gap:32px">
+<div>
+<div class="ph">
+<div class="sb"><span>9:41</span><span>●●●</span></div>
+<div class="frow" style="justify-content:space-between"><span style="font-weight:700;font-size:15px">Feed</span><span class="fbtn">✉</span></div>
+<div style="padding:6px 0 12px 16px">
+<div class="kicker" style="font-size:10px;margin-bottom:10px">Instants — last 24h</div>
+<div class="fx gap10" style="display:flex;gap:10px">
+<div style="text-align:center"><div class="ring"><div class="av av3" style="width:44px;height:44px"></div></div><div style="font-size:9px;color:#9B94AD;margin-top:5px">You +</div></div>
+<div style="text-align:center"><div class="ring"><div class="av av1" style="width:44px;height:44px"></div></div><div style="font-size:9px;color:#9B94AD;margin-top:5px">meera</div></div>
+<div style="text-align:center"><div class="ring" style="border-color:#3A3547"><div class="av av2" style="width:44px;height:44px"></div></div><div style="font-size:9px;color:#9B94AD;margin-top:5px">arjun</div></div>
+<div style="text-align:center"><div class="ring" style="border-color:#3A3547"><div class="av av4" style="width:44px;height:44px"></div></div><div style="font-size:9px;color:#9B94AD;margin-top:5px">nia</div></div>
+</div>
+</div>
+<div class="imgph" style="flex:1;margin:0 12px;border-radius:12px"><span>feed post</span></div>
+<div class="frow" style="justify-content:space-around;margin-top:4px"><span class="fbtn">⌂</span><span class="fbtn">⌕</span><span class="fbtn" style="background:var(--acc);color:#0F0E0C">＋</span><span class="fbtn">♡</span><span class="fbtn"><span class="av av3" style="width:18px;height:18px;display:block"></span></span></div>
+</div>
+<div class="phlabel"><div class="t">1 · Home tray</div><div class="s">Instants get a first-class tray on the feed — faces first, unseen rings highlighted.</div></div>
+</div>
+<div>
+<div class="ph" style="background:#0B0A10">
+<div style="display:flex;gap:4px;padding:10px 12px 0"><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span></div>
+<div class="frow"><div class="av av1" style="width:30px;height:30px"></div><div><div style="font-size:12px;font-weight:600">meera.k</div><div style="font-size:10px;color:#9B94AD">2h ago · Instant</div></div><span style="margin-left:auto;color:#9B94AD">✕</span></div>
+<div class="imgph" style="flex:1;margin:0 10px;border-radius:12px;position:relative"><span>photo</span></div>
+<div class="frow"><div class="chip" style="flex:1;text-align:left;padding:10px 14px">Reply to meera…</div><span class="fbtn">♡</span></div>
+</div>
+<div class="phlabel"><div class="t">2 · Viewer</div><div class="s">Who, when, and how far through — always visible. Tap sides to navigate.</div></div>
+</div>
+<div>
+<div class="ph">
+<div class="sb"><span>9:41</span><span>●●●</span></div>
+<div class="imgph" style="height:32%;margin:0 12px;border-radius:12px"><span>your capture</span></div>
+<div style="padding:16px 16px 6px;font-weight:700;font-size:14px">Send this Instant?</div>
+<div style="padding:0 16px;display:flex;flex-direction:column;gap:8px">
+<div class="pill pilla">Close friends · 12</div>
+<div class="pill pillb">All followers · 348</div>
+<div class="pill pillb">Choose people…</div>
+</div>
+<div style="padding:14px 16px;margin-top:auto;display:flex;flex-direction:column;gap:8px">
+<div class="pill pilla" style="font-size:13px">Send →</div>
+<div style="text-align:center;font-size:10px;color:#9B94AD">Nothing is shared until you send.</div>
+</div>
+</div>
+<div class="phlabel"><div class="t">3 · Consent sheet</div><div class="s">Capture → preview → explicit audience → send. With a 10s undo after.</div></div>
+</div>
+<div>
+<div class="ph">
+<div class="sb"><span>9:41</span><span>●●●</span></div>
+<div class="frow" style="justify-content:space-between"><span style="font-weight:700;font-size:14px">Audience</span><span style="font-size:11px;color:var(--acc)">Done</span></div>
+<div style="padding:0 14px"><div class="chip" style="display:block;padding:9px 14px">⌕ Search people</div></div>
+<div style="padding:10px 14px;display:flex;flex-direction:column;gap:10px">
+<div class="fx ac gap10" style="display:flex;align-items:center;gap:10px"><div class="av av1" style="width:32px;height:32px"></div><span style="font-size:12px;flex:1">meera.k</span><span style="color:var(--acc);font-size:13px">☑</span></div>
+<div class="fx ac gap10" style="display:flex;align-items:center;gap:10px"><div class="av av4" style="width:32px;height:32px"></div><span style="font-size:12px;flex:1">nia_r</span><span style="color:var(--acc);font-size:13px">☑</span></div>
+<div class="fx ac gap10" style="display:flex;align-items:center;gap:10px"><div class="av av2" style="width:32px;height:32px"></div><span style="font-size:12px;flex:1">arjun.dev</span><span style="color:#4A4556;font-size:13px">☐</span></div>
+<div class="fx ac gap10" style="display:flex;align-items:center;gap:10px"><div class="av av3" style="width:32px;height:32px"></div><span style="font-size:12px;flex:1">rahul_m</span><span style="color:#4A4556;font-size:13px">☐</span></div>
+</div>
+<div style="padding:0 14px 14px;margin-top:auto"><div class="pill pilla" style="font-size:12px">Save as Close friends</div></div>
+</div>
+<div class="phlabel"><div class="t">4 · Audience picker</div><div class="s">Build and reuse lists — audience is a setting you own, not a surprise.</div></div>
+</div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Before After"><div class="wrap">
+<span class="kicker">08 — Impact Map</span>
+<h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Every problem, answered<span class="acc">.</span></span></h2>
+<div style="margin-top:40px">
+<div class="ba fadeup"><div class="bcell mut">Buried in the chat screen as ambiguous cards</div><div class="arr">→</div><div class="bcell">Dedicated tray at the top of the home feed</div></div>
+<div class="ba fadeup"><div class="bcell mut">Anonymous carousel — "whose photo is this?"</div><div class="arr">→</div><div class="bcell">Author avatar, name, and timestamp pinned in the viewer</div></div>
+<div class="ba fadeup"><div class="bcell mut">Hidden gestures, no sense of position</div><div class="arr">→</div><div class="bcell">Segmented progress bar + standard side tap zones</div></div>
+<div class="ba fadeup"><div class="bcell mut">Capture publishes instantly, silently</div><div class="arr">→</div><div class="bcell">Preview → audience → send, plus a 10-second undo</div></div>
+<div class="ba fadeup"><div class="bcell mut">One audience: everybody</div><div class="arr">→</div><div class="bcell">Close friends, custom lists, and per-Instant selection</div></div>
+</div>
+</div></section>
+<section class="sec" data-screen-label="Validation"><div class="wrap grid2" style="gap:64px">
+<div><span class="kicker">09 — Validation</span><h2 class="disp h2 rv" style="margin-top:16px"><span class="rvi">Did it work?</span></h2></div>
+<div class="col" style="display:flex;flex-direction:column;gap:24px">
+<p class="body">I retested the same three tasks with 5 new participants on a Figma prototype. <strong>All 5 completed every task unaided.</strong> Average time to find Instants dropped from "never" to under 15 seconds, and — the number I care most about — all 5 correctly predicted who would see their post before sending it.</p>
+<blockquote class="quote fadeup">"Oh, it asks me first. Okay, that I would actually use."<br><span class="kicker" style="display:inline-block;margin-top:12px">— P3, validation round</span></blockquote>
+<p class="body"><strong>What I'd do next:</strong> test whether the consent step adds friction for power users like Meera (a "always send to close friends" default could skip it), and explore how the tray behaves at 50+ followed accounts.</p>
+</div>
+</div></section>
+<footer class="sec" style="padding-bottom:60px" data-screen-label="Footer"><div class="wrap fx ac jb">
+<a class="navlink" href="Portfolio Home.dc.html">← Back home</a>
+<span class="disp" style="font-size:16px">AKHILJITH ASHOK</span>
+<a class="navlink" href="Portfolio Home.dc.html#contact">Get in touch ↗</a>
+</div></footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#C9F24E&quot;,&quot;options&quot;:[&quot;#C9F24E&quot;,&quot;#FF7A45&quot;,&quot;#6EE7F2&quot;,&quot;#9D8CFF&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;showDisclaimer&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  state = { menuOpen: false };
+  componentDidMount() {
+    this.applyAccent();
+    const reveal = () => {
+      const vh = window.innerHeight;
+      document.querySelectorAll('.rv:not(.in),.fadeup:not(.in)').forEach(el => {
+        if (el.getBoundingClientRect().top < vh * 0.92) el.classList.add('in');
+      });
+    };
+    this.revealFn = reveal;
+    requestAnimationFrame(reveal);
+    this.revealTimer = setInterval(() => {
+      reveal();
+      if (!document.querySelector('.rv:not(.in),.fadeup:not(.in)')) clearInterval(this.revealTimer);
+    }, 200);
+  }
+  componentWillUnmount() {
+    if (this.revealTimer) clearInterval(this.revealTimer);
+  }
+  componentDidUpdate() { this.applyAccent(); }
+  applyAccent() {
+    document.documentElement.style.setProperty('--acc', this.props.accent ?? '#C9F24E');
+  }
+  renderVals() {
+    return {
+      showDisclaimer: this.props.showDisclaimer ?? true,
+      menuCls: this.state.menuOpen ? 'open' : '',
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false })
+    };
+  }
+}
+</script>
+</body>
+</html>
